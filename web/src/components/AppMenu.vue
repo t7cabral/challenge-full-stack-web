@@ -12,6 +12,7 @@
         :value="item"
         color="primary"
         variant="plain"
+        :to="item.to"
       >
         <template v-slot:prepend>
           <v-icon :icon="item.icon"></v-icon>
@@ -32,7 +33,8 @@ export default {
   name: 'AppMenu',
   data: () => ({
       items: [
-        { text: 'Alunos', icon: 'mdi-account-multiple' }
+        { text: 'Home', icon: 'mdi-home', to: '/' },
+        { text: 'Alunos', icon: 'mdi-account-multiple', to: '/aluno' },
       ],
     }),
 }

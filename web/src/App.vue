@@ -13,9 +13,9 @@
         <v-col sm="4" md="4" lg="3">
           <AppMenu/>
         </v-col>
-        <v-col style="background-color:
-        rgb(227, 233, 224);">
-          <HelloWorld/>
+        <v-col style="background-color: rgb(227, 233, 224);">
+          <!--<router-view></router-view>-->
+          <RouterView />
         </v-col>
       </v-row>
       <v-row>&nbsp;</v-row>
@@ -44,7 +44,9 @@
 <script>
 import AppHeader from './components/AppHeader.vue'
 import AppMenu from './components/AppMenu.vue'
-import HelloWorld from './components/HelloWorld.vue'
+import { RouterView } from 'vue-router'
+
+//import HelloWorld from './components/HelloWorld.vue'
 
 export default {
   name: 'App',
@@ -52,7 +54,7 @@ export default {
   components: {
     AppHeader,
     AppMenu,
-    HelloWorld,
+    RouterView,
   },
 
   data: () => ({
