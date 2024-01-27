@@ -22,9 +22,10 @@ async function getOne(request: Request, response: Response) {
 }
 
 async function getAll(request: Request, response: Response) {
+  const term = request.query.term as string || '';
   try {
     return response.status(HttpStatus.OK).json(
-      await StudentService.getAll()
+      await StudentService.getAll(term)
     );
   } catch (err: any) {
     return response.status(HttpStatus.INTERNAL_SERVER_ERROR).json({

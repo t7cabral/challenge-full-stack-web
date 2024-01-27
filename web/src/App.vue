@@ -10,10 +10,10 @@
       
       <v-row>&nbsp;</v-row>
       <v-row class="center-region">
-        <v-col sm="4" md="4" lg="3">
+        <v-col xs="12" sm="4" md="3" lg="2">
           <AppMenu/>
         </v-col>
-        <v-col style="background-color: rgb(227, 233, 224);">
+        <v-col xs="12" sm="8" md="9" lg="10" style="background-color: #f8f8f8;">
           <!--<router-view></router-view>-->
           <RouterView />
         </v-col>

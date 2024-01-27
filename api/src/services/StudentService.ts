@@ -13,11 +13,13 @@ const getOne = (id: string) => {
     .first();
 }
 
-const getAll = () => {
+const getAll = (term: string) => {
   return database
     .select('id', 'name', 'email', 'cpf', 'createdAt')
     .table(tableName)
-    .where('flagDelete', '=', 0);
+    .where('flagDelete', '=', 0)
+    .whereILike('name', `%${term}%`)
+
 }
 
 const createOne = async (data: any) => {

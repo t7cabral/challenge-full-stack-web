@@ -34,7 +34,7 @@ export default {
   data: () => ({
       items: [
         { text: 'Home', icon: 'mdi-home', to: '/' },
-        { text: 'Alunos', icon: 'mdi-account-multiple', to: '/aluno' },
+        { text: 'Alunos', icon: 'mdi-account-multiple', to: '/student' },
       ],
     }),
 }

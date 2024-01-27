@@ -9,11 +9,14 @@
   },
   "dependencies": {
     "@mdi/font": "5.9.55",
+    "axios": "^1.6.6",
     "core-js": "^3.8.3",
     "roboto-fontface": "*",
     "vue": "^3.2.13",
     "vue-router": "^4.2.5",
     "vuetify": "^3.0.0-beta.0",
+    "vuetify-toast-snackbar": "^0.6.1",
+    "vuetify-use-dialog": "^0.6.8",
     "webfontloader": "^1.0.0"
   },
   "devDependencies": {
@@ -25,6 +28,7 @@
     "eslint": "^7.32.0",
     "eslint-plugin-vue": "^8.0.3",
     "vue-cli-plugin-vuetify": "~2.5.8",
+    "vuetify-notifier": "^0.0.10",
     "webpack-plugin-vuetify": "^2.0.0-alpha.0"
   },
   "eslintConfig": {
