@@ -63,65 +63,69 @@
     </v-row>
 
     <!-- form new/edit students -->
-    <v-dialog width="500" v-model="studentFormControl.show">
-              <v-card density="compact">
-                <v-card-title>
-                  <span class="text-h5">Formulário Cadastro de Aluno</span>
-                </v-card-title>
-                <v-divider></v-divider>
+      <v-dialog width="500" v-model="studentFormControl.show">
+                <v-card density="compact">
+                  <v-card-title>
+                    <span class="text-h5">Formulário Cadastro de Aluno</span>
+                  </v-card-title>
+                  <v-divider></v-divider>
 
-                <v-card-text >
-                  <v-container>
-                    <v-form>
-                      <v-text-field
-                      density="compact"
-                      label="Código"
-                      variant="outlined"
-                      v-model="studentFormControl.values.id"
-                      :readonly="studentFormControl.modeEdit"
-                      :disabled="studentFormControl.modeEdit"
-                      @input="studentFormControl.values.id = studentFormControl.values.id.toUpperCase()"
-                      required
-                      ></v-text-field>
+                  <v-card-text >
+                    <v-container>
+                      <v-form ref="formStudent">
+                        <v-text-field
+                        density="compact"
+                        label="Código"
+                        variant="outlined"
+                        v-model="studentFormControl.values.id"
+                        :readonly="studentFormControl.modeEdit"
+                        :disabled="studentFormControl.modeEdit"
+                        @input="studentFormControl.values.id = studentFormControl.values.id.toUpperCase()"
+                        :rules="studentFormControl.rules.id"
+                        required
+                        ></v-text-field>
 
-                      <v-text-field
-                      density="compact"
-                      label="CPF"
-                      variant="outlined"
-                      v-model="studentFormControl.values.cpf"
-                      :readonly="studentFormControl.modeEdit"
-                      :disabled="studentFormControl.modeEdit"
-                      @input="studentFormControl.values.cpf = studentFormControl.values.cpf.toUpperCase()"
-                      required
-                      ></v-text-field>
-                    
-                      <v-text-field
-                      density="compact"
-                      label="Nome"
-                      variant="outlined"
-                      v-model="studentFormControl.values.name"
-                      @input="studentFormControl.values.name = studentFormControl.values.name.toUpperCase()"
-                      required
-                      ></v-text-field>
+                        <v-text-field
+                        density="compact"
+                        label="CPF"
+                        variant="outlined"
+                        v-model="studentFormControl.values.cpf"
+                        :readonly="studentFormControl.modeEdit"
+                        :disabled="studentFormControl.modeEdit"
+                        @input="studentFormControl.values.cpf = studentFormControl.values.cpf.toUpperCase()"
+                        :rules="studentFormControl.rules.cpf"
+                        required
+                        ></v-text-field>
+                      
+                        <v-text-field
+                        density="compact"
+                        label="Nome"
+                        variant="outlined"
+                        v-model="studentFormControl.values.name"
+                        @input="studentFormControl.values.name = studentFormControl.values.name.toUpperCase()"
+                        :rules="studentFormControl.rules.name"
+                        required
+                        ></v-text-field>
 
-                      <v-text-field
-                      density="compact"
-                      label="Email"
-                      variant="outlined"
-                      v-model="studentFormControl.values.email"
-                      @input="studentFormControl.values.email = studentFormControl.values.email.toUpperCase()"
-                      ></v-text-field>
-                    </v-form>
-                  </v-container>
-                </v-card-text>
+                        <v-text-field
+                        density="compact"
+                        label="Email"
+                        variant="outlined"
+                        v-model="studentFormControl.values.email"
+                        @input="studentFormControl.values.email = studentFormControl.values.email.toUpperCase()"
+                        :rules="studentFormControl.rules.email"
+                        ></v-text-field>
+                      </v-form>
+                    </v-container>
+                  </v-card-text>
 
-                <v-card-actions co>
-                  <v-spacer></v-spacer>
-                  <v-btn density="default" variant="text" @click="studentFormControl.show = false">Canelar</v-btn>
-                  <v-btn color="blue-darken-1" variant="text" @click="saveStudent">Salvar</v-btn>
-              </v-card-actions>
-              </v-card>
-    </v-dialog>
+                  <v-card-actions co>
+                    <v-spacer></v-spacer>
+                    <v-btn density="default" variant="text" @click="studentFormControl.show = false">Canelar</v-btn>
+                    <v-btn color="blue-darken-1" variant="text" @click="saveStudent">Salvar</v-btn>
+                </v-card-actions>
+                </v-card>
+      </v-dialog>
   </v-container>
 </template>
 
@@ -138,9 +142,28 @@
         modeEdit: false,
         values: {
           id: '',
+          cpf: '',
           name: '',
           email: '',
-          cpf: '',
+        },
+        rules: {
+          id: [
+            v => !!v || 'Código é obrigatório',
+            v => !/[^0-9]/g.test(v) || 'Somente números são permitidos',
+            v => (v && v.length < 21) || 'Deve conter no máximo 20 caracteres',
+          ],
+          name : [
+            v => !!v || 'Nome é obrigatório',
+            v => (v && (v.length > 3 && v.length < 101)) || 'Deve conter entre 4 e 100 catacteres',
+          ],
+          cpf: [
+            v => !!v || 'CPF é obrigatório',
+            v => !/[^0-9]/g.test(v) || 'Somente números são permitidos',
+            v => (v && v.length == 11) || 'Deve conter 11 caracteres',
+          ],
+          email: [
+            v => (!v || /^(([^<>()[\]\\.,;:\s@']+(\.[^<>()\\[\]\\.,;:\s@']+)*)|('.+'))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(v)) || 'E-mai inválido',
+          ]
         }
       },
       headers: [
@@ -174,6 +197,9 @@
       },
 
       async saveStudent () {
+        const { valid } = await this.$refs.formStudent.validate()
+        if (!valid) return
+
         const data = Object.assign({}, this.studentFormControl.values);
         if (this.studentFormControl.modeEdit) {
           const res = await ServiceStudent.updateOne(data);
