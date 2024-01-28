@@ -19,7 +19,6 @@ const getAll = (term: string) => {
     .table(tableName)
     .where('flagDelete', '=', 0)
     .whereILike('name', `%${term}%`)
-
 }
 
 const createOne = async (data: any) => {
