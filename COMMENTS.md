@@ -76,10 +76,18 @@ Os arquivos foram separados de acordo com sua funcionalidades:
 - services: Módulo que faz chamadas a API;
 
 
-# O que não foi implementado ou poderia melhorar?
-- Documentação da API com [swagger]([https://swagger.io/);
+# O que não foi implementado e/ou poderia melhorar?
+- Criar a documentação da API com [swagger]([https://swagger.io/);
 
 - Autenticação usando [JWT](https://jwt.io/). Tem exemplo de implementação no meu repositório [Github](https://github.com/t7cabral/w2bit-teste);
 
-- Cobertura de 100% nos testes de integração e unitários na API e frontend WEB;
+- Criar serviço para notificar e atualizar o frontend usando [socket.io](socket.io) e [RabbitMQ](https://rabbitmq.com/);
 
+- Cobrir em 100% a API e frontend WEB com testes unitários e de integração;
+
+- Hospedar a aplicação na Amazon usando o serviço EC2;
+
+# Vídeo demonstrativo
+[![](./apresentacao.png)](./apresentacao.mp4)
+
+Fim!
