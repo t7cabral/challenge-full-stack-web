@@ -132,6 +132,7 @@
 
 <script>
   import ServiceStudent from '../services/Student.js'
+  import { toast } from 'vue3-toastify';
 
   export default {
     name: 'AlunoViewTest',
@@ -182,7 +183,11 @@
 
     methods: {
       async getAllStudent () {
-        this.students = await ServiceStudent.getAll(this.searchTerm || '');
+        try {
+          this.students = await ServiceStudent.getAll(this.searchTerm || '');
+        } catch (err) {
+          toast.error(err.message, { autoClose: 2500, position: toast.POSITION.BOTTOM_RIGHT });
+        }
       },
 
       async openFormStudent (item={}) {
@@ -200,18 +205,24 @@
         const { valid } = await this.$refs.formStudent.validate()
         if (!valid) return
 
-        const data = Object.assign({}, this.studentFormControl.values);
-        if (this.studentFormControl.modeEdit) {
-          const res = await ServiceStudent.updateOne(data);
-          const itemPosition = this.students.findIndex(element => element.id === res.id);
-          if (itemPosition < 0) return;
-          Object.assign(this.students[itemPosition], res)
-        } else {
-          const res = await ServiceStudent.createOne(data);
-          this.students.push(res)
+        try {
+          const data = Object.assign({}, this.studentFormControl.values);
+          if (this.studentFormControl.modeEdit) {
+            const res = await ServiceStudent.updateOne(data);
+            const itemPosition = this.students.findIndex(element => element.id === res.id);
+            if (itemPosition < 0) return;
+            Object.assign(this.students[itemPosition], res)
+            toast.success("Registro editado com sucesso!", { autoClose: 1500, position: toast.POSITION.BOTTOM_RIGHT });
+          } else {
+            const res = await ServiceStudent.createOne(data);
+            this.students.push(res)
+            toast.success("Registro criado com sucesso!", { autoClose: 1500, position: toast.POSITION.BOTTOM_RIGHT });
+          }
+          this.studentFormControl.show = false;
+          this.studentFormControl.values = {id: '', cpf: '', name: '', email: '' }
+        } catch (err) {
+          toast.error(err.message, { autoClose: 2500, position: toast.POSITION.BOTTOM_RIGHT });
         }
-        this.studentFormControl.show = false;
-        this.studentFormControl.values = {id: '', cpf: '', name: '', email: '' }
       },
 
       async deleteStudent (item) {
@@ -227,13 +238,15 @@
           const itemPosition = this.students.findIndex(element => element.id === item.id);
           if (itemPosition < 0) return;
           this.students.splice(itemPosition, 1);
+          toast.success("Registro apagado com sucesso!", { autoClose: 1500, position: toast.POSITION.BOTTOM_RIGHT });
         } catch (err) {
-          console.log(err)
+          toast.error(err.message, { autoClose: 2500, position: toast.POSITION.BOTTOM_RIGHT });
         }
       },
     },
   }
 </script>
+
 
 <style>
   .v-data-table__td {

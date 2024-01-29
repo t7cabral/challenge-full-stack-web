@@ -10,7 +10,7 @@ module.exports = {
   client: process.env.DB_CLIENT,
   version: process.env.DB_VERSION,
   connection: {
-    host: process.env.DB_HOST,
+    host: process.env.NODE_ENV === "test" ? process.env.DB_HOST_DEV : process.env.DB_HOST,
     port: Number(process.env.DB_PORT),
     database: process.env.NODE_ENV === "test" ? `${process.env.DB_NAME}_test` : process.env.DB_NAME,
     user: process.env.DB_USER,
