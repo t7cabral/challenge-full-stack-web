@@ -10,7 +10,7 @@ beforeAll(async () => {
   await StudentBuilder.clearTable()
 });
 
-describe.skip('GET /student', () => {
+describe('GET /student', () => {
   beforeAll(async () => (await StudentBuilder.createMany(5)))
 
   it('Validates return properties', async () => {
@@ -33,11 +33,9 @@ describe.skip('GET /student', () => {
 describe('POST /student', () => {
   it('should record successfully', async () => {
     const data = await StudentBuilder.generateStudent()
-
     const response = await request(app)
       .post(ROUTE_BASE)
       .send(data)
-
     const { status, body } = response;
     expect(status).toBe(HttpStatus.CREATED);
     expect(body).toHaveProperty('id', data.id)
