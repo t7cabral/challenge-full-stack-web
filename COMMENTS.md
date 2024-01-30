@@ -76,7 +76,7 @@ Os arquivos foram separados de acordo com sua funcionalidades:
 - services: Módulo que faz chamadas a API;
 
 
-# O que não foi implementado e/ou poderia melhorar?
+## O que não foi implementado e/ou poderia melhorar?
 - Criar a documentação da API com [swagger]([https://swagger.io/);
 
 - Autenticação usando [JWT](https://jwt.io/). Tem exemplo de implementação no meu repositório [Github](https://github.com/t7cabral/w2bit-teste);
@@ -87,8 +87,12 @@ Os arquivos foram separados de acordo com sua funcionalidades:
 
 - Hospedar a aplicação na Amazon usando o serviço EC2;
 
-# Vídeo demonstrativo
+## Quais requisitos obrigatórios que não foram entregues
+Todos os requisitos obrigatórios foram implementados.
+
+## Vídeo demonstrativo
 [![](./apresentacao.png)](./apresentacao.mp4)
 
-Obrigado,
-Fim!
+Obrigado!
+
+Desafio entregue em 29/01/2024.
